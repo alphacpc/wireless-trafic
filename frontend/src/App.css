@@ -182,3 +182,27 @@
   }
   
 }
+
+
+@media screen and (max-width : 375px) {
+  .divGraphItem.barChart{
+    background: yellowgreen;
+    width: 100%;
+    padding-right: 0px;
+  }
+
+  .divGraphItem.barChart img{
+    width: 100%;
+  }
+
+
+  .divTableStream tr th:nth-child(2),
+  .divTableStream tr td:nth-child(2),
+  .divTableStream tr th:nth-child(6),
+  .divTableStream tr td:nth-child(6)
+  {
+    display: none;
+  }
+
+
+}
