@@ -23,7 +23,7 @@ for packet in capture.sniff_continuously(packet_count=100):
             print(packet.dns.qry_name)
 
         print ("%s --- IP %s:%s --- %s:%s --- (%s)" % (localtime, src_addr, src_port, dst_addr, dst_port, protocol))
-        print(packet)
+
 
     except AttributeError as e:
         # ignore packets other than TCP, UDP and IPv4

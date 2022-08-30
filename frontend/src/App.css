@@ -1,14 +1,133 @@
+.divAppContainer{
+  /* background-color: #EEEEEE; */
+}
+
+/* ************************************************ */
+/* ************ POUR La TABLE STRAMING *********** */
+/* ********************************************** */
 .divTableStream{
-  background: red;
-  min-height: 100vh;
+  /* background: red; */
+  margin-bottom: 40px;
 }
 
 .divTableStream table{
-  background: greenyellow;
+  /* background: greenyellow; */
   width: 100%;
+  border-collapse: collapse;
+}
+
+.divTableStream thead tr{
+  /* background: red; */
+  /* background: #18978F; */
+  /* color: #FFF; */
+}
+
+.divTableStream thead tr th{
+  padding: 15px;
+}
+
+.divTableStream tbody tr{
+  /* background: antiquewhite; */
+  transition: all ease .3s;
+}
+
+.divTableStream thead th{
+  /* background: red; */
+  padding: 10px;
+  font-size: 20px;
+  letter-spacing: 1px;
 }
 
 .divTableStream tbody td{
   text-align: center;
-  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 8px;
+}
+
+.divTableStream tbody tr{
+  background: #D4F6CC; 
+}
+
+.divTableStream tbody tr:nth-child(8){
+  background: #DFE8CC; 
+}
+
+.divTableStream tbody tr:nth-child(9){
+  background: #81CACF; 
+}
+
+.divTableStream tbody tr:nth-child(10){
+  background: #00D7FF; 
+}
+
+.divTableStream tbody tr:nth-child(11){
+  background: #A6D1E6; 
+}
+
+.divTableStream tbody tr:nth-child(12){
+  background: #FFDEB4; 
+}
+
+.divTableStream tbody tr:hover{
+  background: #54BAB9;
+}
+
+
+
+
+/* ****************************************** */
+/* ************ POUR LES GRAPHES *********** */
+/* **************************************** */
+.divGraphes{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* background: aqua; */
+  padding: 50px 0 ;
+  margin-bottom: 50px;
+}
+
+.divGraphItem.lineChart{
+  flex: 2;
+  padding-left: 50px;
+}
+
+
+.divGraphItem.barChart{
+  flex: 1.5;
+  /* background: yellow; */
+  display: flex;
+  justify-content: center;
+  padding-right: 50px;
+}
+
+
+
+/* *********************************** */
+/* ************ POUR MAPS *********** */
+/* ********************************* */
+.divGeos{
+  /* background: orange; */
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.divMaps img{
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+
+.divGeoItem{
+  flex: 1;
+}
+
+.divGeoItem.divInf{
+  padding: 50px ;
+}
+
+.divGeoItem.divMaps{
+  flex: 2;
+  padding-right: 50px ;
 }
