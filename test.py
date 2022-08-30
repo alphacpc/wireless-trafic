@@ -9,7 +9,7 @@ capture = pyshark.LiveCapture(interface=networkInterface)
 
 print("listening on %s" % networkInterface)
 
-for packet in capture.sniff_continuously(packet_count=200):
+for packet in capture.sniff_continuously(packet_count=100):
     try:
         localtime = time.asctime(time.localtime(time.time()))
      
@@ -18,8 +18,12 @@ for packet in capture.sniff_continuously(packet_count=200):
         src_port = packet[protocol].srcport   # source port
         dst_addr = packet.ip.dst            # destination address
         dst_port = packet[protocol].dstport   # destination port
+        
+        if "DNS" in packet and not packet.dns.flags_response.int_value:
+            print(packet.dns.qry_name)
 
         print ("%s --- IP %s:%s --- %s:%s --- (%s)" % (localtime, src_addr, src_port, dst_addr, dst_port, protocol))
+        print(packet)
 
     except AttributeError as e:
         # ignore packets other than TCP, UDP and IPv4
