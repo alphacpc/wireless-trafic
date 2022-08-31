@@ -1,22 +1,19 @@
-version: '3.4'
+version: '3'
 services:
   zookeeper:
-    image: zookeeper
+    image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper-wifi
-    ports:
-      - 2181:2181
     environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   broker:
-    image: ubuntu/kafka
+    image: confluentinc/cp-kafka:7.0.1
     container_name: broker-wifi
     ports:
       - "9092:9092"
     depends_on:
       - zookeeper
-    volumes:
-      - ./data/kafka:/var/run/docker.sock
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
