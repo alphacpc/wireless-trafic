@@ -4,20 +4,11 @@ import requests
 from kafka3 import KafkaProducer
 
 
-url = "https://api.jcdecaux.com/vls/v1/stations?apiKey=2ad8eced5129d4ce52775999119427cfc6af1e2e"
-
-print("mafe1")
-
-
 def json_serializer(data):
     return json.dumps(data).encode("utf-8")
 
-print("mafe2")
-
 
 producer = KafkaProducer(bootstrap_servers="localhost:9092", api_version=(0,10,0,1))
-
-print("mafe3")
 
 
 while True:
