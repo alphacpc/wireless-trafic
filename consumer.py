@@ -22,6 +22,3 @@ for msg in consumer:
     }
     
     elastic.index(index="captures", body=doc, doc_type="_doc")
-
-
-    print(doc)

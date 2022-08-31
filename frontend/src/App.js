@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react"
 import './App.css';
 import bar from "./assets/images/bar.jpg"
 import maps from "./assets/images/maps.jpg"
@@ -5,9 +6,18 @@ import line from "./assets/images/line.png"
 
 function App() {
 
-  var liste = [1,2,3,4,5,6,7,8,1,2,2,2,2]
+  let liste = [1,2,3,4,5,6,7,8,1,2,2,2,2]
 
-  //https://datasciencesphere.com/project/track-location-ip-address-python-geocoder/
+  let [timer, setTimer] = useState(0)
+
+  setTimeout(()=> {
+    setTimer(timer => timer = timer + 1)
+  }, 3000)
+
+
+  useEffect(()=>{
+    console.log("first")
+  }, [timer])
 
 
   return (
@@ -29,7 +39,7 @@ function App() {
 
           <tbody>
            {liste.map( (el,ind) =>  (<tr key={ind} >
-              <td>444</td>
+              <td>{timer}</td>
               <td>Mardi 30 Aout, 16:44:23</td>
               <td>192.X.X.X</td>
               <td>192.X.X.X</td>
