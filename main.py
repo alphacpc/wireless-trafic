@@ -5,7 +5,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
 elastic = Elasticsearch()
 
 @app.route('/', methods=["GET"])
@@ -19,6 +18,52 @@ def home():
     resp = elastic.search(index="captures", body = body)
 
     return jsonify({"data": resp['hits']['hits']})
+
+
+
+
+@app.route('/protocol', methods=["GET"])
+def protocole():
+    body = {
+        "aggs": {
+            "keys": {
+                "terms": {
+                    "field": "dst_port.keyword"
+                }
+            }
+        },
+        "size": 0
+    }
+    
+    resp = elastic.search(index="captures", body = body)
+
+    return jsonify({"data": resp['aggregations']['keys']['buckets']})
+
+
+
+
+
+@app.route('/length', methods=["GET"])
+def length():
+    body = {
+        "aggs": {
+            "keys": {
+                "terms": {
+                    "field": "information.keyword"
+                }
+            }
+        },
+        "size": 0
+    }
+    
+    resp = elastic.search(index="captures", body = body)
+
+    return jsonify({"data": resp['aggregations']['keys']['buckets']})
+
+
+
+
+
 
 
 if __name__=='__main__':

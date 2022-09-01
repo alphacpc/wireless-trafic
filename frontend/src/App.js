@@ -15,9 +15,21 @@ function App() {
     setTabs(data.data)
   }
 
+  let handleProtocole = async () => {
+    let response = await fetch("http://localhost:5000/protocol")
+    let data = await response.json()
+    console.log("Datas Protocoles => ", data)
+  }
+
+  let handleLength = async () => {
+    let response = await fetch("http://localhost:5000/length")
+    let data = await response.json()
+    console.log("Datas length => ", data)
+  }
+
   let handleTable = (tabs) => {
     return (tabs.map( (capture,ind) =>  (<tr key={ind} className={capture['_source']['dst_port']}>
-      <td>{ ind+1 + " - " + timer}</td>
+      <td>{ ind + 1 }</td>
       <td>{capture['_source']['localtime']}</td>
       <td>{capture['_source']['protocol']}</td>
       <td>{capture['_source']['src_port']}</td>
@@ -26,18 +38,21 @@ function App() {
     </tr>)))
   }
 
-  let checked = (tabs.length === 0) ? <h3>Chargement en cours !</h3> : handleTable(tabs)
+  let loaded = (tabs.length === 0) ? <h3>Chargement en cours !</h3> : handleTable(tabs)
 
-  setTimeout(()=> {
+  setTimeout( () => {
     setTimer(timer => timer = timer + 1)
-  }, 10000000)
-
-  console.log("Valeur de checked => ",tabs)
+  }, 10000)
 
 
   useEffect(()=>{
-    console.log("first")
+    
     handleFetcher()
+
+    handleLength()
+
+    handleProtocole()
+  
   }, [timer])
 
 
@@ -58,11 +73,7 @@ function App() {
             </tr>
           </thead>
 
-          <tbody>
-            {
-              checked
-            }
-          </tbody>
+          <tbody> { loaded } </tbody>
 
         </table>
       </div>
