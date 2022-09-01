@@ -6,30 +6,51 @@ import line from "./assets/images/line.png"
 
 function App() {
 
-  let liste = [1,2,3,4,5,6,7,8,1,2,2,2,2]
-
   let [timer, setTimer] = useState(0)
+  let [tabs, setTabs] = useState([])
+
+  let handleFetcher = async () => {
+    let response = await fetch("http://127.0.0.1:5000/")
+    let data = await response.json()
+    setTabs(data.data)
+  }
+
+  let handleTable = (tabs) => {
+    return (tabs.map( (capture,ind) =>  (<tr key={ind} className={capture['_source']['dst_port']}>
+      <td>{ ind+1 + " - " + timer}</td>
+      <td>{capture['_source']['localtime']}</td>
+      <td>{capture['_source']['protocol']}</td>
+      <td>{capture['_source']['src_port']}</td>
+      <td>{capture['_source']['dst_port']}</td>
+      <td>{capture['_source']['information']}</td>
+    </tr>)))
+  }
+
+  let checked = (tabs.length === 0) ? <h3>Chargement en cours !</h3> : handleTable(tabs)
 
   setTimeout(()=> {
     setTimer(timer => timer = timer + 1)
-  }, 3000)
+  }, 10000000)
+
+  console.log("Valeur de checked => ",tabs)
 
 
   useEffect(()=>{
     console.log("first")
+    handleFetcher()
   }, [timer])
 
 
   return (
     <div className="divAppContainer">
       
-      <div className="divTableStream">
-        <table className="table">
+      <div className="divTableStream cadre-table-scroll">
+        <table className="table table-scroll">
 
           <thead>
             <tr>
               <th>Numero</th>
-              <th>Temps</th>
+              <th>Date & Heure</th>
               <th>Source</th>
               <th>Destination</th>
               <th>Protocol</th>
@@ -38,14 +59,9 @@ function App() {
           </thead>
 
           <tbody>
-           {liste.map( (el,ind) =>  (<tr key={ind} >
-              <td>{timer}</td>
-              <td>Mardi 30 Aout, 16:44:23</td>
-              <td>192.X.X.X</td>
-              <td>192.X.X.X</td>
-              <td>DNS</td>
-              <td>www.google.com</td>
-            </tr>))}
+            {
+              checked
+            }
           </tbody>
 
         </table>

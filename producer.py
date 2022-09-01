@@ -1,30 +1,64 @@
-import json
+import pyshark
 import time
-import requests
 from kafka3 import KafkaProducer
 
 
-def json_serializer(data):
-    return json.dumps(data).encode("utf-8")
+# Define Interface
+networkInterface = "wlp0s20f3"
 
-
+# Define Producer
 producer = KafkaProducer(bootstrap_servers="localhost:9092", api_version=(0,10,0,1))
 
 
-while True:
-    response = requests.get(url)
-    stations = response.json()
-    print("mafe4")
-    producer.send('touch', b'some_message_bytes')
+# Define Capture
+capture = pyshark.LiveCapture(interface=networkInterface)
 
-    print("mafe5")
+print("Programme tourne...")
+for packet in capture:
+    try:
+        localtime = time.asctime(time.localtime(time.time()))
+     
+        protocol = packet.transport_layer
+        src_addr = packet.ip.src
+        src_port = packet[protocol].srcport
+        dst_addr = packet.ip.dst
+        dst_port = packet[protocol].dstport
+        domaine_name = packet.dns.qry_name if ("DNS" in packet and not packet.dns.flags_response.int_value) else packet.length
 
 
+        producer.send('tester', bytes("%s - %s - %s - %s - %s - %s -%s"%(localtime, src_addr, src_port, dst_addr, dst_port, protocol, domaine_name), 'utf-8'))
+ 
 
-    for station in stations:
+    except AttributeError as e:
+        # IGNORE PACKETs !=  TCP, UDP and IPv4
         pass
-        # producer.send("test-stations", json.dumps(station))
+
+print("Fin du programme !")
+
+
+
+
+# def launch_producer():
     
-    print("{} Produced {} station records".format(time.time(), len(stations)))
+#     # print("Programme tourne...")
     
-    time.sleep(4)
+#     for packet in capture:
+#         try:
+#             localtime = time.asctime(time.localtime(time.time()))
+        
+#             protocol = packet.transport_layer
+#             src_addr = packet.ip.src
+#             src_port = packet[protocol].srcport
+#             dst_addr = packet.ip.dst
+#             dst_port = packet[protocol].dstport
+#             domaine_name = packet.dns.qry_name if ("DNS" in packet and not packet.dns.flags_response.int_value) else packet.length
+
+
+#             producer.send('tester', bytes("%s - %s - %s - %s - %s - %s -%s"%(localtime, src_addr, src_port, dst_addr, dst_port, protocol, domaine_name), 'utf-8'))
+    
+
+#         except AttributeError as e:
+#             # IGNORE PACKETs !=  TCP, UDP and IPv4
+#             pass
+
+#     # print("Fin du programme !")

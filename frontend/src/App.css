@@ -24,6 +24,8 @@
 
 .divTableStream thead tr th{
   padding: 15px;
+  background: #395B64;
+  color: #FFF;
 }
 
 .divTableStream tbody tr{
@@ -49,31 +51,51 @@
   background: #D4F6CC; 
 }
 
-.divTableStream tbody tr:nth-child(8){
-  background: #DFE8CC; 
+.divTableStream tbody tr.UDP{
+  background: #D4F6CC; 
+  /* background: #FFDEB4;  */
 }
 
-.divTableStream tbody tr:nth-child(9){
+.divTableStream tbody tr.TCP{
   background: #81CACF; 
 }
 
-.divTableStream tbody tr:nth-child(10){
+.divTableStream tbody tr.DNS{
   background: #00D7FF; 
 }
 
-.divTableStream tbody tr:nth-child(11){
+.divTableStream tbody tr.IPv4{
   background: #A6D1E6; 
 }
 
-.divTableStream tbody tr:nth-child(12){
+/* .divTableStream tbody tr:nth-child(12){
   background: #FFDEB4; 
-}
+} */
 
 .divTableStream tbody tr:hover{
   background: #54BAB9;
 }
 
 
+
+
+
+
+
+
+.cadre-table-scroll {
+  display: block;
+  height: 40vh;
+  overflow-y: scroll;
+}
+.table-scroll thead th {
+  position: sticky;
+  top: 0;
+}
+.table-scroll tfoot td {
+  position: sticky;
+  bottom: 0;
+}
 
 
 /* ****************************************** */
