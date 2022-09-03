@@ -22,6 +22,8 @@ def home():
 
 
 
+
+
 @app.route('/protocol', methods=["GET"])
 def protocole():
     body = {
@@ -38,6 +40,8 @@ def protocole():
     resp = elastic.search(index="captures", body = body)
 
     return jsonify({"data": resp['aggregations']['keys']['buckets']})
+
+
 
 
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 import './App.css';
 
-
-import { Bar, Line } from "react-chartjs-2"
 import {Chart as ChartJs} from "chart.js/auto"
+import LineChart from "./components/LineChart";
+import BarChart from "./components/BarChart";
+
+
 
 function App() {
 
@@ -23,37 +25,32 @@ function App() {
     let data = await response.json()
     data = data.data
 
-    console.log("Valeur de data => ", data)
-
     setProtocolData({
       labels : data.map( element => element.key),
       datasets : [{
         label : "Quantités de protocol émis",
         data : data.map( element => element.doc_count),
-        backgroundColor : ["#81CACF", "#D4F6CC"],
+        backgroundColor : ["#EAE3D2", "#FFC23C"],
         borderColor : "black",
         borderWidth : 2,
 
       }]  
     })
-    console.log("Datas Protocoles les deux => ", data, protocolData)
   }
 
   let handleLength = async () => {
     let response = await fetch("http://localhost:5000/length")
     let data = await response.json()
     data = data.data
-    console.log("Datas length => ", data)
 
     setLengthData({
       labels : data.map( element => element.key),
       datasets : [{
         label : "Quantités de protocol émis",
         data : data.map( element => element.doc_count),
-        backgroundColor : ["#81CACF", "#D4F6CC"],
-        borderColor : "black",
-        borderWidth : 2,
-
+        backgroundColor : ["#FFC23C", "#D4F6CC"],
+        borderColor : "#FFC23C",
+        borderWidth : 1
       }]  
     })
   }
@@ -115,15 +112,11 @@ function App() {
       <div className="divGraphes">
 
         <div className="divGraphItem lineChart">
-          { 
-            (lengthData != null) ? <Line data={lengthData} /> : "Hello"
-          }
+          <LineChart length={lengthData}/>
         </div>
 
         <div className="divGraphItem barChart">
-          {
-            (protocolData != null) ? <Bar data={protocolData} /> : "Hello"
-          }
+          <BarChart protocol={protocolData}/>
         </div>
 
       </div>
