@@ -71,7 +71,7 @@ function App() {
 
   setTimeout( () => {
     setTimer(timer => timer = timer + 1)
-  }, 10000)
+  }, 5000)
 
 
   useEffect(()=>{

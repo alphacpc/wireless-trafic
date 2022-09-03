@@ -45,8 +45,7 @@
 }
 
 .divTableStream tbody tr.UDP{
-  background: #EAE3D2; 
-  /* background: #FFDEB4;  */
+  background: #FFC23C; 
 }
 
 .divTableStream tbody tr.TCP{
@@ -54,11 +53,11 @@
 }
 
 .divTableStream tbody tr.DNS{
-  background: #00D7FF; 
+  background: #EB1D36; 
 }
 
 .divTableStream tbody tr.IPv4{
-  background: #A6D1E6; 
+  background: #59CE8F; 
 }
 
 .divTableStream tbody tr:hover{
@@ -138,7 +137,6 @@
 
   .divGraphItem.lineChart{
     width: 100%;
-    background-color: #54BAB9;
     padding-left: 0;
     justify-content: center;
     margin-bottom: 50px;
@@ -173,7 +171,6 @@
 
 @media screen and (max-width : 375px) {
   .divGraphItem.barChart{
-    background: yellowgreen;
     width: 100%;
     padding-right: 0px;
   }
