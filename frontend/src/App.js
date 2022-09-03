@@ -4,6 +4,8 @@ import './App.css';
 import {Chart as ChartJs} from "chart.js/auto"
 import LineChart from "./components/LineChart";
 import BarChart from "./components/BarChart";
+import LineChartMulti from "./components/LineChartMulti";
+
 
 
 
@@ -28,7 +30,7 @@ function App() {
     setProtocolData({
       labels : data.map( element => element.key),
       datasets : [{
-        label : "Quantités de protocol émis",
+        label : "Lorem ipsum",
         data : data.map( element => element.doc_count),
         backgroundColor : ["#EAE3D2", "#FFC23C"],
         borderColor : "black",
@@ -46,7 +48,7 @@ function App() {
     setLengthData({
       labels : data.map( element => element.key),
       datasets : [{
-        label : "Quantités de protocol émis",
+        label : "Lorem ipsum",
         data : data.map( element => element.doc_count),
         backgroundColor : ["#FFC23C", "#D4F6CC"],
         borderColor : "#FFC23C",
@@ -112,7 +114,7 @@ function App() {
       <div className="divGraphes">
 
         <div className="divGraphItem lineChart">
-          <LineChart length={lengthData}/>
+          <LineChartMulti/>
         </div>
 
         <div className="divGraphItem barChart">
