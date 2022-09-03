@@ -4,10 +4,16 @@ import bar from "./assets/images/bar.jpg"
 import maps from "./assets/images/maps.jpg"
 import line from "./assets/images/line.png"
 
+
+import { Bar } from "react-chartjs-2"
+import {Chart as ChartJs} from "chart.js/auto"
+
 function App() {
 
   let [timer, setTimer] = useState(0)
   let [tabs, setTabs] = useState([])
+  // let [protocol, setProtocol ] = useState([])
+  let [protocolData, setProtocolData] = useState(null)
 
   let handleFetcher = async () => {
     let response = await fetch("http://127.0.0.1:5000/")
@@ -18,7 +24,18 @@ function App() {
   let handleProtocole = async () => {
     let response = await fetch("http://localhost:5000/protocol")
     let data = await response.json()
-    console.log("Datas Protocoles => ", data)
+    data = data.data
+
+    console.log("Valeur de data => ", data)
+
+    setProtocolData({
+      labels : data.map( element => element.key),
+      datasets : [{
+        label : "Hello World",
+        data : data.map( element => element.doc_count)
+      }]  
+    })
+    console.log("Datas Protocoles les deux => ", data, protocolData)
   }
 
   let handleLength = async () => {
@@ -38,11 +55,16 @@ function App() {
     </tr>)))
   }
 
-  let loaded = (tabs.length === 0) ? <h3>Chargement en cours !</h3> : handleTable(tabs)
+
+  let loaded = (tabs.length === 0) ? <tr><td>Chargement en cours !</td></tr> : handleTable(tabs)
 
   setTimeout( () => {
     setTimer(timer => timer = timer + 1)
   }, 10000)
+
+  // let b
+
+  // b = 
 
 
   useEffect(()=>{
@@ -52,8 +74,12 @@ function App() {
     handleLength()
 
     handleProtocole()
-  
+
+
+
   }, [timer])
+
+
 
 
   return (
@@ -79,7 +105,11 @@ function App() {
       </div>
 
       <div className="divGraphes">
-        
+        <div id="myChart">
+          { 
+            (protocolData != null) ? <Bar data={protocolData} /> : "Hello"
+          }
+        </div>
         <div className="divGraphItem lineChart">
           <img src={line} alt="line" />
         </div>
