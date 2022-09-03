@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react"
 import './App.css';
-import bar from "./assets/images/bar.jpg"
-import maps from "./assets/images/maps.jpg"
-import line from "./assets/images/line.png"
 
 
-import { Bar } from "react-chartjs-2"
+import { Bar, Line } from "react-chartjs-2"
 import {Chart as ChartJs} from "chart.js/auto"
 
 function App() {
 
   let [timer, setTimer] = useState(0)
   let [tabs, setTabs] = useState([])
-  // let [protocol, setProtocol ] = useState([])
   let [protocolData, setProtocolData] = useState(null)
+  let [lengthData, setLengthData] = useState(null)
 
   let handleFetcher = async () => {
     let response = await fetch("http://127.0.0.1:5000/")
@@ -31,8 +28,12 @@ function App() {
     setProtocolData({
       labels : data.map( element => element.key),
       datasets : [{
-        label : "Hello World",
-        data : data.map( element => element.doc_count)
+        label : "Quantités de protocol émis",
+        data : data.map( element => element.doc_count),
+        backgroundColor : ["#81CACF", "#D4F6CC"],
+        borderColor : "black",
+        borderWidth : 2,
+
       }]  
     })
     console.log("Datas Protocoles les deux => ", data, protocolData)
@@ -41,7 +42,20 @@ function App() {
   let handleLength = async () => {
     let response = await fetch("http://localhost:5000/length")
     let data = await response.json()
+    data = data.data
     console.log("Datas length => ", data)
+
+    setLengthData({
+      labels : data.map( element => element.key),
+      datasets : [{
+        label : "Quantités de protocol émis",
+        data : data.map( element => element.doc_count),
+        backgroundColor : ["#81CACF", "#D4F6CC"],
+        borderColor : "black",
+        borderWidth : 2,
+
+      }]  
+    })
   }
 
   let handleTable = (tabs) => {
@@ -62,10 +76,6 @@ function App() {
     setTimer(timer => timer = timer + 1)
   }, 10000)
 
-  // let b
-
-  // b = 
-
 
   useEffect(()=>{
     
@@ -74,8 +84,6 @@ function App() {
     handleLength()
 
     handleProtocole()
-
-
 
   }, [timer])
 
@@ -105,30 +113,19 @@ function App() {
       </div>
 
       <div className="divGraphes">
-        <div id="myChart">
-          { 
-            (protocolData != null) ? <Bar data={protocolData} /> : "Hello"
-          }
-        </div>
+
         <div className="divGraphItem lineChart">
-          <img src={line} alt="line" />
+          { 
+            (lengthData != null) ? <Line data={lengthData} /> : "Hello"
+          }
         </div>
 
         <div className="divGraphItem barChart">
-          <img src={bar} alt="line" />
+          {
+            (protocolData != null) ? <Bar data={protocolData} /> : "Hello"
+          }
         </div>
 
-      </div>
-
-      <div className="divGeos">
-
-        <div className="divGeoItem divInf">
-          <h2>Hello world !!!</h2>
-        </div>
-
-        <div className="divGeoItem divMaps">
-          <img src={maps} alt="Geo" />
-        </div>
       </div>
 
     </div>
