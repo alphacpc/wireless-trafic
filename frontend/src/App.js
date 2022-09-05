@@ -58,12 +58,12 @@ function App() {
   }
 
   let handleTable = (tabs) => {
-    return (tabs.map( (capture,ind) =>  (<tr key={ind} className={capture['_source']['dst_port']}>
+    return (tabs.map( (capture,ind) =>  (<tr key={ind} className={capture['_source']['protocol']}>
       <td>{ ind + 1 }</td>
       <td>{capture['_source']['localtime']}</td>
+      <td>{capture['_source']['src_addr']}</td>
+      <td>{capture['_source']['dst_addr']}</td>
       <td>{capture['_source']['protocol']}</td>
-      <td>{capture['_source']['src_port']}</td>
-      <td>{capture['_source']['dst_port']}</td>
       <td>{capture['_source']['information']}</td>
     </tr>)))
   }
