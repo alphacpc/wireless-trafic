@@ -9,7 +9,7 @@ elastic = Elasticsearch()
 
 tabs = []
 
-
+print("Consumer tourne...")
 for msg in consumer:
 
     response = msg.value.decode("utf-8").split("-")
@@ -27,4 +27,4 @@ for msg in consumer:
     elastic.index(index="captures", body=doc, doc_type="_doc")
 
 
-    print("Hello")
+print("Consumer finish !!!")

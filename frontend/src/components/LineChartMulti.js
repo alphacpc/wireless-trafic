@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from "react-chartjs-2"
 
 
-const LineChartMulti = () => {
+const LineChartMulti = ({len}) => {
 
 
   let dataFirst = {
@@ -40,7 +40,7 @@ let chartOptions = {
 
 
   return (
-    <Line data={speedData} options={chartOptions} />
+    (len != null) ? <Line data={speedData} options={chartOptions} /> : <p className='p-loader'>Chargement en cours !</p>
   )
 }
 

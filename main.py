@@ -10,7 +10,7 @@ elastic = Elasticsearch()
 @app.route('/', methods=["GET"])
 def home():
     body = {
-        "size" : 1000,
+        "size" : 10000,
         "query" : {
             "match_all":{}
         }

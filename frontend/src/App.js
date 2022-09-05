@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import './App.css';
 
 import {Chart as ChartJs} from "chart.js/auto"
-import LineChart from "./components/LineChart";
+// import LineChart from "./components/LineChart";
 import BarChart from "./components/BarChart";
 import LineChartMulti from "./components/LineChartMulti";
 
@@ -32,7 +32,7 @@ function App() {
       datasets : [{
         label : "Lorem ipsum",
         data : data.map( element => element.doc_count),
-        backgroundColor : ["#EAE3D2", "#FFC23C"],
+        backgroundColor : ["#FFC23C", "#EAE3D2"],
         borderColor : "black",
         borderWidth : 2,
 
@@ -69,11 +69,11 @@ function App() {
   }
 
 
-  let loaded = (tabs.length === 0) ? <tr><td>Chargement en cours !</td></tr> : handleTable(tabs)
+  let loaded = (tabs.length === 0) ? <div className="loader"><p className="p-loader">Chargement en cours !</p></div> : handleTable(tabs)
 
   setTimeout( () => {
     setTimer(timer => timer = timer + 1)
-  }, 5000)
+  }, 20000)
 
 
   useEffect(()=>{
@@ -114,7 +114,7 @@ function App() {
       <div className="divGraphes">
 
         <div className="divGraphItem lineChart">
-          <LineChartMulti/>
+          <LineChartMulti len={lengthData}/>
         </div>
 
         <div className="divGraphItem barChart">
