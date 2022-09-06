@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Bar } from "react-chartjs-2";
 
-const BarChart = ({protocol}) => {
+const BarChart = ({data}) => {
+
+  const [dnsData, setDnsData] = useState([])
+
+  const dataDomaine = {
+    labels : dnsData.map( element => element.key),
+    datasets : [{
+      label : "Top 10 des noms de domaines",
+      data : dnsData.map( element => element.doc_count),
+      backgroundColor : ["#FFC23C", "#EAE3D2"],
+      borderColor : "black",
+      borderWidth : 2,
+    }]  
+  }
+
+  useEffect(()=>{
+    data && setDnsData(data)
+  }, [data])
+
   return (
-    (protocol != null) ? <Bar data={ protocol } /> : <p className='p-loader'>Chargement en cours !</p>
+    (data != null) ? <Bar data={ dataDomaine } /> : <p className='p-loader'>Chargement en cours !</p>
   )
 }
 

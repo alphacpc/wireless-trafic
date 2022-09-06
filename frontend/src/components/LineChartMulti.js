@@ -20,26 +20,26 @@ const LineChartMulti = ({len}) => {
 
 
 
-  let dataFirst = {
+  let dataTCP = {
     label: "TCP",
     data: tabTCP,
     lineTension: 0,
     fill: false,
-    borderColor: '#F7EC09'
+    borderColor: '#F9F5EB'
   };
 
-  let dataSecond = {
+  let dataUDP = {
     label: "UDP",
     data: tabUDP,
     lineTension: 0,
     fill: false,
-    borderColor: '#3EC70B'
+    borderColor: '#FFC23C'
   };
 
 
   let speedData = {
     labels: tabDays,
-    datasets: [dataFirst, dataSecond]
+    datasets: [dataTCP, dataUDP]
   };
 
 let chartOptions = {

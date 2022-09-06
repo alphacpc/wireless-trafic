@@ -23,21 +23,11 @@ function App() {
   }
 
   let handleProtocole = async () => {
-    let response = await fetch("http://localhost:5000/protocol")
+    let response = await fetch("http://localhost:5000/api/dns_name")
     let data = await response.json()
-    data = data.data
+    console.log("dans App.js => ", data)
+    setProtocolData(data.data)
 
-    setProtocolData({
-      labels : data.map( element => element.key),
-      datasets : [{
-        label : "Lorem ipsum",
-        data : data.map( element => element.doc_count),
-        backgroundColor : ["#FFC23C", "#EAE3D2"],
-        borderColor : "black",
-        borderWidth : 2,
-
-      }]  
-    })
   }
 
   let handleLength = async () => {
@@ -107,7 +97,7 @@ function App() {
         </div>
 
         <div className="divGraphItem barChart">
-          <BarChart protocol={protocolData}/>
+          <BarChart data={protocolData}/>
         </div>
 
       </div>
