@@ -10,10 +10,11 @@ const BarChart = ({data}) => {
     datasets : [{
       label : "Top 10 des noms de domaines",
       data : dnsData.map( element => element.doc_count),
-      backgroundColor : ["#FFC23C", "#EAE3D2"],
+      // backgroundColor : ["#F5EDDC"],
+      backgroundColor : ["#EB1D36", "#EAE3D2", "#FA9494", "#6FEDD6", "#FFB200", "#21E1E1", "#7DCE13", "#D4F6CC"],
       borderColor : "black",
       borderWidth : 2,
-    }]  
+    }]
   }
 
   useEffect(()=>{

@@ -16,10 +16,6 @@ const LineChartMulti = ({len}) => {
   },[len])
 
 
-  console.log("Valeur de len => ",len)
-
-
-
   let dataTCP = {
     label: "TCP",
     data: tabTCP,
@@ -42,16 +38,16 @@ const LineChartMulti = ({len}) => {
     datasets: [dataTCP, dataUDP]
   };
 
-let chartOptions = {
-  legend: {
-    display: true,
-    position: 'top',
-    labels: {
-      boxWidth: 80,
-      fontColor: 'black'
+  let chartOptions = {
+    legend: {
+      display: true,
+      position: 'top',
+      labels: {
+        boxWidth: 80,
+        fontColor: 'black'
+      }
     }
-  }
-};
+  };
 
 
   return (
