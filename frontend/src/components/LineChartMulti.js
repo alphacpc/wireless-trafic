@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Line } from "react-chartjs-2"
 
 
 const LineChartMulti = ({len}) => {
 
 
+  const [tabTCP, setTabTCP] = useState([])
+  const [tabUDP, setTabUDP] = useState([])
+  const [tabDays, setTabDays] = useState([])
+
+  useEffect(()=>{
+    len && setTabTCP(len.map(element => element['protocol_agg']['buckets'][0]['doc_count']))
+    len && setTabUDP(len.map(element => element['protocol_agg']['buckets'][1]['doc_count']))
+    len && setTabDays(len.map(element => element['key_as_string'].split(" ")[0]))
+  },[len])
+
+
+  console.log("Valeur de len => ",len)
+
+
+
   let dataFirst = {
-    label: "Lorem ipsum",
-    data: [0, 59, 75, 20, 20, 55, 40],
+    label: "TCP",
+    data: tabTCP,
     lineTension: 0,
     fill: false,
     borderColor: '#F7EC09'
   };
 
   let dataSecond = {
-    label: "Lorem impsum",
-    data: [20, 15, 60, 60, 65, 30, 70],
+    label: "UDP",
+    data: tabUDP,
     lineTension: 0,
     fill: false,
     borderColor: '#3EC70B'
@@ -23,7 +38,7 @@ const LineChartMulti = ({len}) => {
 
 
   let speedData = {
-    labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+    labels: tabDays,
     datasets: [dataFirst, dataSecond]
   };
 

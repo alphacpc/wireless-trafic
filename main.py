@@ -104,7 +104,7 @@ def protocol_daily():
                     "interval": "day"
                 },
                 "aggs": {
-                    "country_agg": {
+                    "protocol_agg": {
                         "terms": {
                             "field": "protocol.keyword",
                             "size": 2

@@ -1,6 +1,5 @@
 from kafka3 import KafkaConsumer
 from elasticsearch6 import Elasticsearch
-from datetime import datetime
 
 from pprint import pprint
 

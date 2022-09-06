@@ -17,7 +17,7 @@ function App() {
   let [lengthData, setLengthData] = useState(null)
 
   let handleFetcher = async () => {
-    let response = await fetch("http://127.0.0.1:5000/")
+    let response = await fetch("http://127.0.0.1:5000/api/all")
     let data = await response.json()
     setTabs(data.data)
   }
@@ -41,20 +41,9 @@ function App() {
   }
 
   let handleLength = async () => {
-    let response = await fetch("http://localhost:5000/length")
+    let response = await fetch("http://localhost:5000/api/protocol_daily")
     let data = await response.json()
-    data = data.data
-
-    setLengthData({
-      labels : data.map( element => element.key),
-      datasets : [{
-        label : "Lorem ipsum",
-        data : data.map( element => element.doc_count),
-        backgroundColor : ["#FFC23C", "#D4F6CC"],
-        borderColor : "#FFC23C",
-        borderWidth : 1
-      }]  
-    })
+    setLengthData(data.data)
   }
 
   let handleTable = (tabs) => {
@@ -73,7 +62,7 @@ function App() {
 
   setTimeout( () => {
     setTimer(timer => timer = timer + 1)
-  }, 20000)
+  }, 100000)
 
 
   useEffect(()=>{
